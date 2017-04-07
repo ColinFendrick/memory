@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import song from '../public/Yussef Kamaal - Strings Of Light_291005533_soundcloud.mp3'
+import song from '../public/starwars-c_kjllrden.mp3'
 
 class Music extends Component {
 
   render () {
-    return <audio autoPlay='true' loop='true' controls='controls'>
+    return <audio autoPlay loop>
         <source src={song} type='audio/mp3' />
       </audio>
   }

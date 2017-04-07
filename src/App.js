@@ -11,7 +11,7 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 20
+    turnsLeft: 1
   }
 
   shuffle = (arr) => {
@@ -49,14 +49,21 @@ class App extends Component {
           }
         }
       )
-    } else {this.setState({turnsLeft: --this.state.turnsLeft})}
-    if (this.state.turnsLeft === 0) {
-      this.completeGame(false)
+    } else {
+      setTimeout(() => {
+        this.setState({
+          turnsLeft: this.state.turnsLeft - 1
+        }, () => {
+          if (this.state.turnsLeft === 0) {
+            setTimeout(() => this.completeGame(false), 150)
+          }
+        })
+      }, 300)
     }
   }
 
   completeGame = (x) => {
-    this.setState({gameOver : true, victory: {x}})
+    this.setState({gameOver : true, victory: x})
   }
 
   reset = () => {
@@ -65,7 +72,7 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 2})
+    turnsLeft: 20})
   }
 
   render() {
