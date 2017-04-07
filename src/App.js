@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import CardArray from './CardArray'
+import Music from './Music'
+import Counter from './Counter'
+import Modal from './Modal'
 
 class App extends Component {
   state = {
     items : ['a0','b1','c2','d3','e4','f5','g6','h7','i8','j9','a0','b1','c2','d3','e4','f5','g6','h7','i8','j9'],
     turned: [],
     matched: [],
-    won: false,
-    turnsLeft: 40
+    gameOver: false,
+    victory: false,
+    turnsLeft: 2
   }
-// This function works to shuffle, now just do it only on reloads
+
   shuffle = (arr) => {
     for (let i = arr.length-1; i >=0; i--) {
 
@@ -20,14 +24,10 @@ class App extends Component {
         arr[i] = itemAtIndex
     }
     return arr;
-}
+  }
 
   flipCard = (i) => {
-    if ((!this.state.won) && (!this.state.matched.includes(i)) && (!this.state.turned.includes(i)) && (this.state.turnsLeft > 0)) {
-      this.setState({turnsLeft: --this.state.turnsLeft})
-      if (this.state.turnsLeft === 0) {
-        this.won()
-      }
+    if ((!this.state.gameOver) && (!this.state.matched.includes(i)) && (!this.state.turned.includes(i)) && (this.state.turnsLeft > 0)) {
       if (this.state.turned.length === 0) {
         this.setState({turned: [i]})
       } else if (this.state.turned.length === 1) {
@@ -45,26 +45,45 @@ class App extends Component {
     if (this.state.items[a] === this.state.items[b] && (a !== b)) {
       this.setState({matched: this.state.matched.concat(a, b)}, () =>  {
          if (this.state.items.length === this.state.matched.length) {
-           this.won()
+           this.completeGame(true)
           }
         }
       )
+    } else {this.setState({turnsLeft: --this.state.turnsLeft})}
+    if (this.state.turnsLeft === 0) {
+      this.completeGame(false)
     }
   }
 
-  won = () => {
-    this.setState({won: true})
+  completeGame = (x) => {
+    this.setState({gameOver : true, victory: {x}})
+  }
+
+  reset = () => {
+    this.setState({items: this.shuffle(this.state.items),
+    turned: [],
+    matched: [],
+    gameOver: false,
+    victory: false,
+    turnsLeft: 2})
   }
 
   render() {
-    // this.setState({items:     this.shuffle(this.state.items)})
+    let modalState = 'App'
+    if (this.state.gameOver === true) {
+      modalState = 'App modal'
+    }
+    if (this.state.gameOver === false) {
+      modalState = 'App'
+    }
+
     return (
-      <div className="App">
+      <div className={modalState}>
         <h1>Memory Match</h1>
-        <CardArray items={this.state.items} turned={this.state.turned} matched={this.state.matched} flipCard={this.flipCard}/>
-        <audio autoPlay='true' controls='controls' loop='true'>
-          <source src='../public/Yussef Kamaal - Strings Of Light_291005533_soundcloud.mp3' type='audio/mpeg' />
-        </audio>
+        <Counter turnsLeft={this.state.turnsLeft} />
+        <CardArray state={this.state} flipCard={this.flipCard}/>
+        <Music />
+        <Modal reset={this.reset} victory={this.state.victory}/>
       </div>
     );
   }

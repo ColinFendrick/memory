@@ -13,6 +13,7 @@ class Card extends Component {
     } else if (this.props.turned.includes(this.props.index)) {
       classState = `${this.props.items[this.props.index]}`
     } else {classState = ``}
+    
     return <div onClick={this._click} className={classState}>
       {this.props.items[this.props.index]}</div>
     }
