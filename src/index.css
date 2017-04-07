@@ -45,6 +45,25 @@ div.modal .overlay {
 
 }
 
+.healthBar {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 500px;
+}
+
+
+.health {
+  width: 50px;
+  height: 30px;
+  background-image: url('http://vignette2.wikia.nocookie.net/zelda/images/d/d1/Heart_%28Ocarina_of_Time%29.png/revision/latest?cb=20100115213958');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 10px 0;
+}
+
+
 .cardArray {
   display: flex;
   flex-wrap: wrap;

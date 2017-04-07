@@ -11,7 +11,7 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 2
+    turnsLeft: 20
   }
 
   shuffle = (arr) => {
