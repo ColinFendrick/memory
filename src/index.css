@@ -2,10 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: rgba(229, 249, 7, 0.19);
+  background-color: rgba(36, 37, 23, 0.19);
+  font-family: 'Georgia', serif;
 }
-
-
 
 div.App {
   text-align: center;
@@ -37,6 +36,15 @@ div.modal .overlay {
   align-items: center;
 }
 
+.dialog {
+  color: rgb(82, 182, 187);
+  font-size: 1.5em;
+  background-color: rgb(40, 37, 71);
+  border-radius: 15px;
+  padding: 10px;
+
+}
+
 .cardArray {
   display: flex;
   flex-wrap: wrap;
@@ -51,50 +59,64 @@ div.modal .overlay {
   height: 23.5%;
   border-radius: 15px;
   margin: 3px;
+  transition: background-color 500ms 0ms;
   background-color: rgba(148, 252, 105, 0.38);
 }
 
 
 .cardArray div.matched {
-  background-color: rgb(7, 8, 4);
+  transition: opacity 500ms 0ms;
+  opacity: 0.4;
+
 }
 
 .cardArray div.a0 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(39, 170, 111);
+
 }
 
 .cardArray div.b1 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(167, 132, 17);
 }
 
 .cardArray div.c2 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(235, 144, 135);
 }
 
 .cardArray div.d3 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(82, 68, 113);
 }
 
 .cardArray div.e4 {
+  transition: background-color 500ms 0ms;
   background-color: rgba(42, 31, 242, 0.66);
 }
 
 .cardArray div.f5 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(215, 102, 52);
 }
 
 .cardArray div.g6 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(39, 206, 212);
 }
 
 .cardArray div.h7 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(143, 133, 121);
 }
 
 .cardArray div.i8 {
+  transition: background-color 500ms 0ms;
   background-color: rgb(193, 156, 157);
 }
 
 .cardArray div.j9 {
+  transition: background-color 500ms 0ms;
   background-color: rgba(24, 130, 159, 0.66);
 }

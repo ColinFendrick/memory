@@ -9,11 +9,11 @@ class Card extends Component {
   render () {
     let classState
     if (this.props.matched.includes(this.props.index)) {
-      classState = 'matched'
+      classState = `${this.props.items[this.props.index]} matched`
     } else if (this.props.turned.includes(this.props.index)) {
       classState = `${this.props.items[this.props.index]}`
     } else {classState = ``}
-    
+
     return <div onClick={this._click} className={classState}>
       {this.props.items[this.props.index]}</div>
     }
