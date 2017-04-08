@@ -88,6 +88,16 @@ div.modal .overlay {
   margin: 10px 0;
 }
 
+.healthGod {
+    width: 50px;
+    height: 30px;
+    background-image: url('http://vignette4.wikia.nocookie.net/zelda/images/1/1b/Heart_Container_%28Majora%27s_Mask%29.png/revision/latest?cb=20120406205109');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px 0;
+}
+
 .cardArray {
   display: flex;
   flex-wrap: wrap;

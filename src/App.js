@@ -4,6 +4,7 @@ import Music from './Music'
 import Counter from './Counter'
 import Modal from './Modal'
 import EasyModeButton from './EasyModeButton.js'
+import CheatHandler from './CheatHandler.js'
 
 class App extends Component {
   state = {
@@ -13,7 +14,9 @@ class App extends Component {
     gameOver: false,
     victory: false,
     turnsLeft: 1,
-    easyMode: false
+    easyMode: false,
+    godMode: 0,
+    cheatCodeValue: 'Bikini Samus?'
   }
 
   shuffle = (arr) => {
@@ -54,7 +57,7 @@ class App extends Component {
     } else {
       setTimeout(() => {
         this.setState({
-          turnsLeft: this.state.turnsLeft - 1
+          turnsLeft: this.state.turnsLeft - 1 + this.state.godMode
         }, () => {
           if (this.state.turnsLeft === 0) {
             setTimeout(() => this.completeGame(false), 150)
@@ -70,12 +73,14 @@ class App extends Component {
 
   reset = () => {
     this.setState({items: this.shuffle(this.state.items),
-    turned: [],
-    matched: [],
-    gameOver: false,
-    victory: false,
-    turnsLeft: 20,
-    easyMode: false})
+      turned: [],
+      matched: [],
+      gameOver: false,
+      victory: false,
+      turnsLeft: 20,
+      godMode: 0,
+      cheatCodeValue: 'Bikini Samus?'}
+    )
   }
 
   toggleEasyMode = () => {
@@ -99,23 +104,40 @@ class App extends Component {
     }
   }
 
+  toggleGodMode = (x) => {
+    if (!x) {
+      this.setState({godMode: 0})
+    } else {
+      this.setState({godMode: 1})
+      alert('Cheaters never win')
+    }
+  }
+
+  changeCheatCodeValue = (e) => {
+    this.setState({cheatCodeValue: e})
+    setTimeout(() => this.checkCheat(), 150)
+  }
+
+  checkCheat = () => {
+    if (this.state.cheatCodeValue.toLowerCase() === 'justin bailey') { this.toggleGodMode(true)
+    } else {this.toggleGodMode(false)}
+  }
+
   render() {
     let modalState = 'App'
-    if (this.state.gameOver === true) {
+    if (this.state.gameOver) {
       modalState = 'App modal'
-    }
-    if (this.state.gameOver === false) {
-      modalState = 'App'
     }
 
     return (
       <div className={modalState}>
         <h1>Memory Match</h1>
-        <Counter turnsLeft={this.state.turnsLeft} />
+        <Counter turnsLeft={this.state.turnsLeft} godMode={this.state.godMode}/>
         <CardArray state={this.state} flipCard={this.flipCard}/>
         <EasyModeButton toggleEasyMode={this.toggleEasyMode} easyMode={this.state.easyMode}/>
-        <Music />
+        <Music easyMode={this.state.easyMode} godMode={this.state.godMode} />
         <Modal reset={this.reset} victory={this.state.victory}/>
+        <CheatHandler cheatCodeValue={this.state.cheatCodeValue} changeCheatCodeValue={this.changeCheatCodeValue} godMode={this.state.godMode}/>
       </div>
     );
   }
