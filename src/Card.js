@@ -14,7 +14,12 @@ class Card extends Component {
       classState = `${this.props.items[this.props.index]}`
     } else {classState = ``}
 
-    return <div onClick={this._click} className={classState}></div>
+    let idInfo = ''
+    if (this.props.easyMode) {
+      idInfo = `${this.props.idInfo}`
+    }
+
+    return <div onClick={this._click} className={classState} id={idInfo}></div>
     }
   }
 

@@ -3,6 +3,7 @@ import CardArray from './CardArray'
 import Music from './Music'
 import Counter from './Counter'
 import Modal from './Modal'
+import EasyModeButton from './EasyModeButton.js'
 
 class App extends Component {
   state = {
@@ -11,7 +12,8 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 1
+    turnsLeft: 1,
+    easyMode: false
   }
 
   shuffle = (arr) => {
@@ -72,7 +74,29 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 20})
+    turnsLeft: 20,
+    easyMode: false})
+  }
+
+  toggleEasyMode = () => {
+    if (this.state.items.length === 20) {
+      this.setState({items:
+        this.shuffle(['a0','b1','c2','d3','e4','a0','b1','c2','d3','e4']),
+        turned: [],
+        matched: [],
+        gameOver: false,
+        victory: false,
+        easyMode: true})
+
+    } else {
+      this.setState({items:
+        this.shuffle(['a0','b1','c2','d3','e4','f5','g6','h7','i8','j9','a0','b1','c2','d3','e4','f5','g6','h7','i8','j9']),
+        turned: [],
+        matched: [],
+        gameOver: false,
+        victory: false,
+        easyMode: false})
+    }
   }
 
   render() {
@@ -89,6 +113,7 @@ class App extends Component {
         <h1>Memory Match</h1>
         <Counter turnsLeft={this.state.turnsLeft} />
         <CardArray state={this.state} flipCard={this.flipCard}/>
+        <EasyModeButton toggleEasyMode={this.toggleEasyMode} easyMode={this.state.easyMode}/>
         <Music />
         <Modal reset={this.reset} victory={this.state.victory}/>
       </div>
