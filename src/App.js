@@ -16,7 +16,8 @@ class App extends Component {
     turnsLeft: 1,
     easyMode: false,
     godMode: 0,
-    cheatCodeValue: 'Bikini Samus?'
+    cheatCodeValue: 'Bikini Samus?',
+    konami: []
   }
 
   shuffle = (arr) => {
@@ -79,8 +80,9 @@ class App extends Component {
       victory: false,
       turnsLeft: 20,
       godMode: 0,
-      cheatCodeValue: 'Bikini Samus?'}
-    )
+      cheatCodeValue: 'Bikini Samus?',
+      konami: []
+    })
   }
 
   toggleEasyMode = () => {
@@ -91,7 +93,9 @@ class App extends Component {
         matched: [],
         gameOver: false,
         victory: false,
-        easyMode: true})
+        easyMode: true,
+        konami: []
+      })
 
     } else {
       this.setState({items:
@@ -100,16 +104,9 @@ class App extends Component {
         matched: [],
         gameOver: false,
         victory: false,
-        easyMode: false})
-    }
-  }
-
-  toggleGodMode = (x) => {
-    if (!x) {
-      this.setState({godMode: 0})
-    } else {
-      this.setState({godMode: 1})
-      alert('Cheaters never win')
+        easyMode: false,
+        konami: []
+      })
     }
   }
 
@@ -123,21 +120,62 @@ class App extends Component {
     } else {this.toggleGodMode(false)}
   }
 
+  toggleGodMode = (x) => {
+    if (!x) {
+      this.setState({godMode: 0})
+    } else {
+      this.setState({godMode: 1})
+      alert('Cheaters never win')
+    }
+  }
+
+  startKonami = (e) => {
+    if ((this.state.konami.length === 9) && (e.keyCode === 65)) {
+      this.setState({konami:
+        this.state.konami.concat(e.keyCode)
+      })
+      this.checkKonami()
+    } else if (e.keyCode === 37 || 38 || 39 || 40 || 66 || 65) {
+      this.setState({konami:
+        this.state.konami.concat(e.keyCode)
+      })
+    }
+    if (this.state.konami.length === 10) {
+      this.setState({konami: []})
+    }
+  }
+
+  checkKonami = () => {
+    let konamiArray = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
+    let trueCounter = 0
+    for (var i = 0; i < this.state.konami.length; i++) {
+      if (this.state.konami[i] === konamiArray[i]) {
+        trueCounter++
+      }
+    }
+    if (trueCounter === 10) {
+      this.setState({turnsLeft: 30})
+    }
+  }
+
+
   render() {
     let modalState = 'App'
     if (this.state.gameOver) {
       modalState = 'App modal'
     }
 
+    window.addEventListener('keydown', this.startKonami)
+
     return (
-      <div className={modalState}>
+      <div className={modalState} onKeyDown={this.startKonami}>
         <h1>Memory Match</h1>
-        <Counter turnsLeft={this.state.turnsLeft} godMode={this.state.godMode}/>
-        <CardArray state={this.state} flipCard={this.flipCard}/>
-        <EasyModeButton toggleEasyMode={this.toggleEasyMode} easyMode={this.state.easyMode}/>
+        <Counter turnsLeft={this.state.turnsLeft} godMode={this.state.godMode} />
+        <CardArray state={this.state} flipCard={this.flipCard} />
+        <EasyModeButton toggleEasyMode={this.toggleEasyMode} easyMode={this.state.easyMode} />
         <Music easyMode={this.state.easyMode} godMode={this.state.godMode} />
-        <Modal reset={this.reset} victory={this.state.victory}/>
-        <CheatHandler cheatCodeValue={this.state.cheatCodeValue} changeCheatCodeValue={this.changeCheatCodeValue} godMode={this.state.godMode}/>
+        <Modal reset={this.reset} victory={this.state.victory} />
+        <CheatHandler cheatCodeValue={this.state.cheatCodeValue} changeCheatCodeValue={this.changeCheatCodeValue} godMode={this.state.godMode} />
       </div>
     );
   }

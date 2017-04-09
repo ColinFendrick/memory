@@ -7,13 +7,13 @@ class Music extends Component {
 
 
   render () {
-    let song
+    let song = stringsOfLight
     if (this.props.easyMode) {
       song = starWarsSong
     }
     if (this.props.godMode) {
       song = metroidPrimeTheme
-    } else { song = stringsOfLight }
+    }
 
     return <audio autoPlay loop>
         <source src={song} type='audio/mp3' />
