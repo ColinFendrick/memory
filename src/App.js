@@ -85,6 +85,8 @@ class App extends Component {
     })
   }
 
+  // testing the git add
+
   toggleEasyMode = () => {
     if (this.state.items.length === 20) {
       this.setState({items:
