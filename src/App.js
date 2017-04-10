@@ -156,11 +156,14 @@ class App extends Component {
     if (trueCounter === 10) {
       this.setState({turnsLeft: 30})
     }
+    if (this.state.konami.length === 10) {
+      trueCounter = 0
+    }
   }
 
 
   render() {
-    
+
     let modalState = 'App'
     if (this.state.gameOver) {
       modalState = 'App modal'
