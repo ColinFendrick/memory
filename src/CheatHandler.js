@@ -7,6 +7,7 @@ class CheatHandler extends Component {
   }
 
   render () {
+    
     return (<div><input value={this.props.cheatCodeValue} onChange={this._change} name='cheatCode' /></div>)
   }
 }

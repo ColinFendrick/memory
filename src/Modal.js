@@ -7,6 +7,7 @@ class Modal extends Component {
   }
 
   render () {
+
     let victoryDialogue = ''
     if (this.props.victory) {
       victoryDialogue = <img src='https://media.makeameme.org/created/your-cool-just.jpg' alt='you won?' className='endPic winnerPic' />

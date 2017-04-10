@@ -4,6 +4,7 @@ import Card from './Card'
 class CardArray extends Component {
 
   render () {
+    
     const items = this.props.state.items.map((item, i) => {
       return <Card items={this.props.state.items}
       turned={this.props.state.turned}

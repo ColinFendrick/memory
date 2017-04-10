@@ -6,6 +6,7 @@ class EasyModeButton extends Component {
   }
 
   render () {
+    
     let easyModeDialogue = 'Are you a dummy, dummy?'
     if (this.props.easyMode) {
       easyModeDialogue = 'You\'re not a dummy'

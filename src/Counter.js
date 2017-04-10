@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class Counter extends Component {
 
   render() {
+    
     let healthName = 'health'
     if (this.props.godMode) {
       healthName = 'healthGod'

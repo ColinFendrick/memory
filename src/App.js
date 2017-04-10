@@ -160,6 +160,7 @@ class App extends Component {
 
 
   render() {
+    
     let modalState = 'App'
     if (this.state.gameOver) {
       modalState = 'App modal'

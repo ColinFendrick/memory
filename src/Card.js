@@ -7,6 +7,7 @@ class Card extends Component {
   }
 
   render () {
+    
     let classState
     if (this.props.matched.includes(this.props.index)) {
       classState = `${this.props.items[this.props.index]} matched`
