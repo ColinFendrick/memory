@@ -13,7 +13,7 @@ class App extends Component {
     matched: [],
     gameOver: false,
     victory: false,
-    turnsLeft: 1,
+    turnsLeft: 20,
     easyMode: false,
     godMode: 0,
     cheatCodeValue: 'Bikini Samus?',
